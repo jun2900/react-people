@@ -59,15 +59,15 @@ const sortByPower = (a, b) => {
   return b.power - a.power;
 }
 
-const List = (props) => {
+const List = ({ data }) => {
   return (
     <>
       <ul className='list'>
         {
-          props.data.sort(sortByPower).map(user => {
+          data.sort(sortByPower).map(user => {
             return <li key={user.name} className='list-item'>
               <div className="list-item-image-container">
-                {/* <img src={`https://robohash.org/${user.id}?set=set1`} /> */}
+                <img src={`https://robohash.org/${user.id}?set=set1`} />
               </div>
               <span className="list-item-name">
                 {user.name} ( Power:{` `}
@@ -109,8 +109,8 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    const response = await fetch('https://jsonplaceholder.typicode.com/users')
-    const json = await response.json()
+    const response = await fetch('/users');
+    const json = await response.json();
     this.setState({ users: json })
   }
 
